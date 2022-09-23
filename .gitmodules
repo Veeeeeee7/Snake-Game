@@ -1,3 +1,0 @@
-[submodule "rust-js-snake-game/www"]
-	path = rust-js-snake-game/www
-	url = https://github.com/rustwasm/wasm-pack-template.git
