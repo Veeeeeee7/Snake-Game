@@ -25,7 +25,6 @@ var rainbowColors = [
     "",
 ];
 
-var scores = 0;
 export function update() {
     addSegments();
     const inputDirection = getInputDirection();
@@ -81,10 +80,6 @@ export function drawRainbowSnake(gameBoard) {
 
 export function expandSnake(amount) {
     newSegments += amount;
-    scores++;
-}
-export function score(){
-    return scores;
 }
 
 export function onSnake(position, onFood, intersect) {
@@ -122,7 +117,6 @@ export function resetSnake() {
         { x: 11, y: 12 },
         { x: 11, y: 13 },
     ];
-    scores = 0;
 }
 
 function equalPositions(pos1, pos2) {
