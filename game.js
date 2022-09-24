@@ -1,6 +1,7 @@
 import {
     update as updateSnake,
-    draw as drawSnake,
+    drawRainbowSnake,
+    drawSnakeWithTail,
     snake_speed,
     snakeIntersection,
     getSnakeHead,
@@ -62,7 +63,7 @@ function update() {
 
 function draw() {
     gameBoard.innerHTML = "";
-    drawSnake(gameBoard);
+    drawRainbowSnake(gameBoard);
     drawFood(gameBoard);
 }
 

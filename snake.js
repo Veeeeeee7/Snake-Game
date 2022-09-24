@@ -2,7 +2,7 @@ import { getInputDirection } from "./input.js";
 import { exportFood as getFood } from "./food.js";
 import { gameStart } from "./input.js";
 
-export const snake_speed = 15;
+export const snake_speed = 10;
 var snakeBody = [
     { x: 11, y: 11 },
     { x: 11, y: 12 },
@@ -10,6 +10,21 @@ var snakeBody = [
 ];
 let newSegments = 0;
 var onFood = false;
+
+var rainbowColors = [
+    "#FF0000",
+    "#FF7F00",
+    "#FFFF00",
+    "#7FFF00",
+    "#00FF00",
+    "#00FF7F",
+    "#00FFFF",
+    "#007FFF",
+    "#0000FF",
+    "#7F00FF",
+    "#FF00FF",
+    "",
+];
 
 export function update() {
     addSegments();
@@ -22,7 +37,7 @@ export function update() {
     snakeBody[0].y += inputDirection.y;
 }
 
-export function draw(gameBoard) {
+export function drawSnakeWithTail(gameBoard) {
     const snakeElementHead = document.createElement("img");
     snakeElementHead.style.gridRowStart = snakeBody[0].y;
     snakeElementHead.style.gridColumnStart = snakeBody[0].x;
@@ -43,6 +58,25 @@ export function draw(gameBoard) {
     snakeElementTail.style.gridColumnStart = snakeBody[snakeBody.length - 1].x;
     snakeElementTail.classList.add("snake-tail");
     gameBoard.appendChild(snakeElementTail);
+}
+
+export function drawRainbowSnake(gameBoard) {
+    const snakeElementHead = document.createElement("img");
+    snakeElementHead.style.gridRowStart = snakeBody[0].y;
+    snakeElementHead.style.gridColumnStart = snakeBody[0].x;
+    snakeElementHead.classList.add("snake-head");
+    snakeElementHead.src = "imgs/snake-head.png";
+    gameBoard.appendChild(snakeElementHead);
+
+    for (var i = 1; i < snakeBody.length; i++) {
+        const snakeElement = document.createElement("div");
+        snakeElement.style.gridRowStart = snakeBody[i].y;
+        snakeElement.style.gridColumnStart = snakeBody[i].x;
+        snakeElement.style.backgroundColor =
+            rainbowColors[(i % rainbowColors.length) - 1];
+        snakeElement.classList.add("snake");
+        gameBoard.appendChild(snakeElement);
+    }
 }
 
 export function expandSnake(amount) {
