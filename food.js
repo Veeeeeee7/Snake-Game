@@ -30,7 +30,7 @@ export function resetFood() {
 
 function getRandomFoodPosition() {
     let newFoodPosition;
-    while (newFoodPosition == null || onSnake(newFoodPosition, false)) {
+    while (newFoodPosition == null || onSnake(newFoodPosition, false, false)) {
         newFoodPosition = randomGridPosition();
     }
     return newFoodPosition;

@@ -1,6 +1,5 @@
 import { getInputDirection } from "./input.js";
 import { exportFood as getFood } from "./food.js";
-import { gameStart } from "./input.js";
 
 export const snake_speed = 10;
 var snakeBody = [
@@ -74,7 +73,7 @@ export function drawRainbowSnake(gameBoard) {
         snakeElement.style.gridColumnStart = snakeBody[i].x;
         snakeElement.style.backgroundColor =
             rainbowColors[(i % rainbowColors.length) - 1];
-        snakeElement.classList.add("snake");
+        snakeElement.classList.add("rainbow-snake");
         gameBoard.appendChild(snakeElement);
     }
 }
@@ -83,15 +82,21 @@ export function expandSnake(amount) {
     newSegments += amount;
 }
 
-export function onSnake(position, onFood) {
+export function onSnake(position, onFood, intersect) {
     // if (gameStart == false) return false;
     if (onFood) {
         // console.log(equalPositions(snakeBody[0], getFood()));
         return equalPositions(snakeBody[0], getFood());
-    } else {
+    } else if (intersect) {
         // console.log(equalPositions(snakeBody[0], snakeBody[1]));
         for (var i = 3; i < snakeBody.length; i++) {
-            if (equalPositions(snakeBody[0], snakeBody[i]) == true) {
+            if (equalPositions(snakeBody[0], snakeBody[i])) {
+                return true;
+            }
+        }
+    } else {
+        for (var i = 0; i < snakeBody.length; i++) {
+            if (equalPositions(position, snakeBody[i])) {
                 return true;
             }
         }
@@ -103,7 +108,7 @@ export function getSnakeHead() {
 }
 
 export function snakeIntersection() {
-    return onSnake(snakeBody[0], (onFood = false));
+    return onSnake(snakeBody[0], false, true);
 }
 
 export function resetSnake() {
