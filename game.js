@@ -11,7 +11,7 @@ import { update as updateFood, draw as drawFood, resetFood } from "./food.js";
 
 import { outsideGrid } from "./grid.js";
 
-import { gameStart } from "./input.js";
+import { gameStart, resetDirection } from "./input.js";
 
 let lastRenderTime = 0;
 let gameOver = false;
@@ -20,6 +20,7 @@ const restartBoard = document.getElementById("restart-board");
 const restartButton = document.getElementById("restart-button");
 
 function main(currentTime) {
+    console.log(gameStart);
     if (gameOver) {
         // if (confirm("You lost. Press ok to restart.")) {
         //     window.location = "/";
@@ -45,6 +46,7 @@ window.requestAnimationFrame(main);
 restartButton.onclick = function restartGame() {
     resetSnake();
     resetFood();
+    resetDirection();
     restartBoard.classList.remove("front");
     restartBoard.classList.add("back");
     gameOver = false;

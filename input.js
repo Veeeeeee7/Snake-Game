@@ -31,3 +31,9 @@ export function getInputDirection() {
     lastInputDirection = inputDirection;
     return inputDirection;
 }
+
+export function resetDirection() {
+    gameStart = false;
+    inputDirection = { x: 0, y: 0 };
+    lastInputDirection = { x: 0, y: 0 };
+}

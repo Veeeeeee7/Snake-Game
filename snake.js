@@ -2,7 +2,7 @@ import { getInputDirection } from "./input.js";
 import { exportFood as getFood } from "./food.js";
 import { gameStart } from "./input.js";
 
-export const snake_speed = 5;
+export const snake_speed = 15;
 var snakeBody = [
     { x: 11, y: 11 },
     { x: 11, y: 12 },
@@ -23,10 +23,11 @@ export function update() {
 }
 
 export function draw(gameBoard) {
-    const snakeElementHead = document.createElement("div");
+    const snakeElementHead = document.createElement("img");
     snakeElementHead.style.gridRowStart = snakeBody[0].y;
     snakeElementHead.style.gridColumnStart = snakeBody[0].x;
     snakeElementHead.classList.add("snake-head");
+    snakeElementHead.src = "snake-head.png";
     gameBoard.appendChild(snakeElementHead);
 
     for (var i = 1; i < snakeBody.length - 1; i++) {
@@ -49,7 +50,7 @@ export function expandSnake(amount) {
 }
 
 export function onSnake(position, onFood) {
-    if (gameStart == false) return false;
+    // if (gameStart == false) return false;
     if (onFood) {
         // console.log(equalPositions(snakeBody[0], getFood()));
         return equalPositions(snakeBody[0], getFood());
