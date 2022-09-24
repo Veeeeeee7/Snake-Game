@@ -20,7 +20,7 @@ let gameOver = false;
 const gameBoard = document.getElementById("game-board");
 const restartBoard = document.getElementById("restart-board");
 const restartButton = document.getElementById("restart-button");
-
+var highScore = 0;
 function main(currentTime) {
     if (gameOver) {
         // if (confirm("You lost. Press ok to restart.")) {
@@ -28,6 +28,15 @@ function main(currentTime) {
         // }
         restartBoard.classList.remove("back");
         restartBoard.classList.add("front");
+        document.getElementById("Current-Score").innerHTML = score();
+        if(score() > highScore) {
+            highScore = score();
+            document.getElementById("New-High-Score").innerHTML = "New High Score!!!";
+        }
+        else {
+            document.getElementById("New-High-Score").innerHTML = "";
+        }
+        document.getElementById("High-Score").innerHTML = highScore;
         // console.log("game over");
         return;
     }
