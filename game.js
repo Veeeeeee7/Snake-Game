@@ -6,6 +6,7 @@ import {
     snakeIntersection,
     getSnakeHead,
     resetSnake,
+    score,
 } from "./snake.js";
 
 import { update as updateFood, draw as drawFood, resetFood } from "./food.js";
@@ -59,7 +60,10 @@ function update() {
     updateSnake();
     updateFood();
     checkDeath();
+    document.getElementById("scores").innerHTML = score();
 }
+
+
 
 function draw() {
     gameBoard.innerHTML = "";
