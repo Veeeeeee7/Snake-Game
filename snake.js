@@ -2,8 +2,8 @@ import { getInputDirection } from "./input.js";
 import { exportFood as getFood } from "./food.js";
 import { gameStart } from "./input.js";
 
-export const snake_speed = 1;
-const snakeBody = [
+export const snake_speed = 5;
+var snakeBody = [
     { x: 11, y: 11 },
     { x: 11, y: 12 },
     { x: 11, y: 13 },
@@ -23,13 +23,25 @@ export function update() {
 }
 
 export function draw(gameBoard) {
-    snakeBody.forEach((segment) => {
+    const snakeElementHead = document.createElement("div");
+    snakeElementHead.style.gridRowStart = snakeBody[0].y;
+    snakeElementHead.style.gridColumnStart = snakeBody[0].x;
+    snakeElementHead.classList.add("snake-head");
+    gameBoard.appendChild(snakeElementHead);
+
+    for (var i = 1; i < snakeBody.length - 1; i++) {
         const snakeElement = document.createElement("div");
-        snakeElement.style.gridRowStart = segment.y;
-        snakeElement.style.gridColumnStart = segment.x;
+        snakeElement.style.gridRowStart = snakeBody[i].y;
+        snakeElement.style.gridColumnStart = snakeBody[i].x;
         snakeElement.classList.add("snake");
         gameBoard.appendChild(snakeElement);
-    });
+    }
+
+    const snakeElementTail = document.createElement("div");
+    snakeElementTail.style.gridRowStart = snakeBody[snakeBody.length - 1].y;
+    snakeElementTail.style.gridColumnStart = snakeBody[snakeBody.length - 1].x;
+    snakeElementTail.classList.add("snake-tail");
+    gameBoard.appendChild(snakeElementTail);
 }
 
 export function expandSnake(amount) {
@@ -39,22 +51,16 @@ export function expandSnake(amount) {
 export function onSnake(position, onFood) {
     if (gameStart == false) return false;
     if (onFood) {
-        // return equalPositions(snakeBody[0], food());
-        console.log(equalPositions(snakeBody[0], getFood()));
+        // console.log(equalPositions(snakeBody[0], getFood()));
+        return equalPositions(snakeBody[0], getFood());
     } else {
-        console.log(equalPositions(snakeBody[0], snakeBody[1]));
+        // console.log(equalPositions(snakeBody[0], snakeBody[1]));
+        for (var i = 3; i < snakeBody.length; i++) {
+            if (equalPositions(snakeBody[0], snakeBody[i]) == true) {
+                return true;
+            }
+        }
     }
-
-    // snakeBody.some((segment) => {
-    //     if (ignoreHead) return false;
-    // });
-    // console.log(position, ignoreHead);
-
-    // return snakeBody.some((segment, index) => {
-    //     if (ignoreHead && index == 0) return false;
-    //     // console.log(equalPositions(segment, position));
-    //     return equalPositions(segment, position);
-    // });
 }
 
 export function getSnakeHead() {
@@ -63,6 +69,14 @@ export function getSnakeHead() {
 
 export function snakeIntersection() {
     return onSnake(snakeBody[0], (onFood = false));
+}
+
+export function resetSnake() {
+    snakeBody = [
+        { x: 11, y: 11 },
+        { x: 11, y: 12 },
+        { x: 11, y: 13 },
+    ];
 }
 
 function equalPositions(pos1, pos2) {

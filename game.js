@@ -4,9 +4,10 @@ import {
     snake_speed,
     snakeIntersection,
     getSnakeHead,
+    resetSnake,
 } from "./snake.js";
 
-import { update as updateFood, draw as drawFood } from "./food.js";
+import { update as updateFood, draw as drawFood, resetFood } from "./food.js";
 
 import { outsideGrid } from "./grid.js";
 
@@ -15,12 +16,16 @@ import { gameStart } from "./input.js";
 let lastRenderTime = 0;
 let gameOver = false;
 const gameBoard = document.getElementById("game-board");
+const restartBoard = document.getElementById("restart-board");
+const restartButton = document.getElementById("restart-button");
 
 function main(currentTime) {
     if (gameOver) {
-        if (confirm("You lost. Press ok to restart.")) {
-            window.location = "/";
-        }
+        // if (confirm("You lost. Press ok to restart.")) {
+        //     window.location = "/";
+        // }
+        restartBoard.classList.remove("back");
+        restartBoard.classList.add("front");
         return;
     }
 
@@ -29,11 +34,22 @@ function main(currentTime) {
     if (secondsSinceLastRender < 1 / snake_speed) return;
     lastRenderTime = currentTime;
 
-    update();
-    draw();
+    if (gameStart) {
+        update();
+        draw();
+    }
 }
 
 window.requestAnimationFrame(main);
+
+restartButton.onclick = function restartGame() {
+    resetSnake();
+    resetFood();
+    restartBoard.classList.remove("front");
+    restartBoard.classList.add("back");
+    gameOver = false;
+    window.requestAnimationFrame(main);
+};
 
 function update() {
     updateSnake();

@@ -25,9 +25,33 @@
                 grid-template-columns: repeat(21, 1fr);
             }
 
+            #restart-board {
+                background-color: black;
+                width: 50vmin;
+                height: 50vmin;
+            }
+
+            .front {
+                position: absolute;
+                z-index: 5 !important;
+            }
+
+            .back {
+                position: absolute;
+                z-index: -1 !important;
+            }
+
             .snake {
                 background-color: hsl(200, 100%, 50%);
                 /* border: 0.25vmin solid black; */
+            }
+
+            .snake-head {
+                background-color: red;
+            }
+
+            .snake-tail {
+                background-color: black;
             }
 
             .food {
@@ -39,5 +63,8 @@
     </head>
     <body>
         <div id="game-board"></div>
+        <div id="restart-board" class="back">
+            <button type="button" onclick="restartGame()" id="restart-button">restart</button>
+        </div>
     </body>
 </html>

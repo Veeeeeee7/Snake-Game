@@ -24,9 +24,13 @@ export function draw(gameBoard) {
     gameBoard.appendChild(foodElement);
 }
 
+export function resetFood() {
+    food = { x: 11, y: 5 };
+}
+
 function getRandomFoodPosition() {
     let newFoodPosition;
-    while (newFoodPosition == null || onSnake(newFoodPosition)) {
+    while (newFoodPosition == null || onSnake(newFoodPosition, false)) {
         newFoodPosition = randomGridPosition();
     }
     return newFoodPosition;
