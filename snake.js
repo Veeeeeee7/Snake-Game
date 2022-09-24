@@ -1,8 +1,15 @@
 import { getInputDirection } from "./input.js";
+import { exportFood as getFood } from "./food.js";
+import { gameStart } from "./input.js";
 
-export const snake_speed = 5;
-const snakeBody = [{ x: 11, y: 11 }];
+export const snake_speed = 1;
+const snakeBody = [
+    { x: 11, y: 11 },
+    { x: 11, y: 12 },
+    { x: 11, y: 13 },
+];
 let newSegments = 0;
+var onFood = false;
 
 export function update() {
     addSegments();
@@ -29,11 +36,25 @@ export function expandSnake(amount) {
     newSegments += amount;
 }
 
-export function onSnake(position, { ignoreHead = false } = {}) {
-    return snakeBody.some((segment, index) => {
-        if (ignoreHead && index == 0) return false;
-        return equalPositions(segment, position);
-    });
+export function onSnake(position, onFood) {
+    if (gameStart == false) return false;
+    if (onFood) {
+        // return equalPositions(snakeBody[0], food());
+        console.log(equalPositions(snakeBody[0], getFood()));
+    } else {
+        console.log(equalPositions(snakeBody[0], snakeBody[1]));
+    }
+
+    // snakeBody.some((segment) => {
+    //     if (ignoreHead) return false;
+    // });
+    // console.log(position, ignoreHead);
+
+    // return snakeBody.some((segment, index) => {
+    //     if (ignoreHead && index == 0) return false;
+    //     // console.log(equalPositions(segment, position));
+    //     return equalPositions(segment, position);
+    // });
 }
 
 export function getSnakeHead() {
@@ -41,7 +62,7 @@ export function getSnakeHead() {
 }
 
 export function snakeIntersection() {
-    return onSnake(snakeBody[0], { ignoreHead: true });
+    return onSnake(snakeBody[0], (onFood = false));
 }
 
 function equalPositions(pos1, pos2) {
