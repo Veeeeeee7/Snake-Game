@@ -31,6 +31,10 @@ function main(currentTime) {
         document.getElementById("Current-Score").innerHTML = score();
         if(score() > highScore) {
             highScore = score();
+            document.getElementById("New-High-Score").innerHTML = "New High Score!!!";
+        }
+        else {
+            document.getElementById("New-High-Score").innerHTML = "";
         }
         document.getElementById("High-Score").innerHTML = highScore;
         // console.log("game over");
