@@ -20,13 +20,13 @@ const restartBoard = document.getElementById("restart-board");
 const restartButton = document.getElementById("restart-button");
 
 function main(currentTime) {
-    console.log(gameStart);
     if (gameOver) {
         // if (confirm("You lost. Press ok to restart.")) {
         //     window.location = "/";
         // }
         restartBoard.classList.remove("back");
         restartBoard.classList.add("front");
+        // console.log("game over");
         return;
     }
 
@@ -36,8 +36,9 @@ function main(currentTime) {
     lastRenderTime = currentTime;
 
     if (gameStart) {
-        update();
+        // console.log("game started");
         draw();
+        update();
     }
 }
 
