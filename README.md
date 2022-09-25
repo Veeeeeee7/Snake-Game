@@ -1,4 +1,4 @@
 # snake game
 
-This snake game is a fun exstention you can buy on the crome web store!
+This snake game is a fun exstention you can get on the chrome web store!
 
