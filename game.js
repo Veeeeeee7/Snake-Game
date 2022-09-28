@@ -20,6 +20,7 @@ let gameOver = false;
 const gameBoard = document.getElementById("game-board");
 const restartBoard = document.getElementById("restart-board");
 const restartButton = document.getElementById("restart-button");
+const startBoard = document.getElementById("start-board");
 var highScore = 0;
 function main(currentTime) {
     if (gameOver) {
@@ -29,11 +30,11 @@ function main(currentTime) {
         restartBoard.classList.remove("back");
         restartBoard.classList.add("front");
         document.getElementById("Current-Score").innerHTML = score();
-        if(score() > highScore) {
+        if (score() > highScore) {
             highScore = score();
-            document.getElementById("New-High-Score").innerHTML = "New High Score!!!";
-        }
-        else {
+            document.getElementById("New-High-Score").innerHTML =
+                "New High Score!!!";
+        } else {
             document.getElementById("New-High-Score").innerHTML = "";
         }
         document.getElementById("High-Score").innerHTML = highScore;
@@ -50,6 +51,8 @@ function main(currentTime) {
         // console.log("game started");
         draw();
         update();
+        startBoard.classList.remove("front");
+        startBoard.classList.add("back");
     }
 }
 
@@ -61,6 +64,8 @@ restartButton.onclick = function restartGame() {
     resetDirection();
     restartBoard.classList.remove("front");
     restartBoard.classList.add("back");
+    startBoard.classList.remove("back");
+    restartBoard.classList.add("front");
     gameOver = false;
     window.requestAnimationFrame(main);
 };

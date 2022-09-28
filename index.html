@@ -27,6 +27,17 @@
                 grid-template-columns: repeat(21, 1fr);
             }
 
+            #start-board {
+                position: absolute;
+                display: flex;
+                /* background-color: black; */
+                width: 40vmin;
+                height: 40vmin;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
             #restart-board {
                 background-color: black;
                 width: 50vmin;
@@ -55,7 +66,7 @@
                 /* border: 0.25vmin solid black; */
             }
             .rainbow-snake {
-                background-color: #FF007F;
+                background-color: #ff007f;
             }
 
             .snake-head {
@@ -120,12 +131,22 @@
                 width: 100vmin;
                 height: 10vmin;
             }
-            
+            #start-text {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                text-align: center;
+            }
         </style>
         <script src="game.js" defer type="module"></script>
     </head>
     <body>
         <div id="game-board"></div>
+        <div id="start-board" class="front">
+            <div id="start-text">use the arrow keys to start</div>
+            <img src="imgs/arrow-keys.png" />
+        </div>
         <div id="scores"></div>
         <div id="restart-board" class="back">
             <p type="text" id="Current-Score-label">score:</p>
@@ -133,7 +154,9 @@
             <p type="text" id="High-Score-label">high score:</p>
             <p type="text" id="High-Score"></p>
             <p type="text" id="New-High-Score"></p>
-            <button type="button" onclick="restartGame()" id="restart-button">restart</button>
+            <button type="button" onclick="restartGame()" id="restart-button">
+                restart
+            </button>
         </div>
     </body>
 </html>
