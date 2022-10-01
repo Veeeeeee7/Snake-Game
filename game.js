@@ -1,12 +1,15 @@
 import {
     update as updateSnake,
     drawRainbowSnake,
-    drawSnakeWithTail,
     snake_speed,
     snakeIntersection,
     getSnakeHead,
     resetSnake,
     score,
+    snake1Body,
+    snake2Body,
+    onSnake,
+    snakeOnSnake,
 } from "./snake.js";
 
 import { update as updateFood, draw as drawFood, resetFood } from "./food.js";
@@ -21,7 +24,8 @@ const gameBoard = document.getElementById("game-board");
 const restartBoard = document.getElementById("restart-board");
 const restartButton = document.getElementById("restart-button");
 const startBoard = document.getElementById("start-board");
-var highScore = 0;
+// var highScore = 0;
+
 function main(currentTime) {
     if (gameOver) {
         // if (confirm("You lost. Press ok to restart.")) {
@@ -29,15 +33,15 @@ function main(currentTime) {
         // }
         restartBoard.classList.remove("back");
         restartBoard.classList.add("front");
-        document.getElementById("Current-Score").innerHTML = score();
-        if (score() > highScore) {
-            highScore = score();
-            document.getElementById("New-High-Score").innerHTML =
-                "New High Score!!!";
-        } else {
-            document.getElementById("New-High-Score").innerHTML = "";
-        }
-        document.getElementById("High-Score").innerHTML = highScore;
+        // document.getElementById("Current-Score").innerHTML = score();
+        // if (score() > highScore) {
+        //     highScore = score();
+        //     document.getElementById("New-High-Score").innerHTML =
+        //         "New High Score!!!";
+        // } else {
+        //     document.getElementById("New-High-Score").innerHTML = "";
+        // }
+        // document.getElementById("High-Score").innerHTML = highScore;
         // console.log("game over");
         return;
     }
@@ -84,5 +88,13 @@ function draw() {
 }
 
 function checkDeath() {
-    gameOver = outsideGrid(getSnakeHead()) || snakeIntersection();
+    if (
+        outsideGrid(getSnakeHead(snake1Body)) ||
+        snakeIntersection(snake1Body) ||
+        outsideGrid(getSnakeHead(snake2Body)) ||
+        snakeIntersection(snake2Body) ||
+        snakeOnSnake(snake1Body, snake2Body)
+    ) {
+        gameOver = true;
+    }
 }
