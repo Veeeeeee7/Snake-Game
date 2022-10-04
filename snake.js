@@ -111,6 +111,7 @@ export function drawRainbowSnake(gameBoard) {
 export function expandSnake(snakeNumber, amount) {
     newSegments[snakeNumber - 1] += amount;
     scores[snakeNumber - 1]++;
+    console.log(newSegments, scores);
 }
 export function score() {
     return scores;
@@ -119,9 +120,14 @@ export function score() {
 export function onSnake(snakeBody, position, onFood, intersect) {
     // if (gameStart == false) return false;
     if (onFood) {
-        console.log("YES");
         // console.log(equalPositions(snakeBody[0], getFood()));
-        return equalPositions(snakeBody[0], getFood());
+
+        if (equalPositions(snakeBody[0], position)) {
+            console.log(snakeBody[0], position);
+
+            return true;
+        }
+        return false;
     } else if (intersect) {
         // console.log(equalPositions(snakeBody[0], snakeBody[1]));
         for (var i = 3; i < snakeBody.length; i++) {

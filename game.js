@@ -27,6 +27,11 @@ const startBoard = document.getElementById("start-board");
 // var highScore = 0;
 
 function main(currentTime) {
+    window.requestAnimationFrame(main);
+    const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
+    if (secondsSinceLastRender < 1 / snake_speed) return;
+    lastRenderTime = currentTime;
+
     if (gameOver) {
         // if (confirm("You lost. Press ok to restart.")) {
         //     window.location = "/";
@@ -45,12 +50,6 @@ function main(currentTime) {
         // console.log("game over");
         return;
     }
-
-    window.requestAnimationFrame(main);
-    const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
-    if (secondsSinceLastRender < 1 / snake_speed) return;
-    lastRenderTime = currentTime;
-
     if (gameStart) {
         // console.log("game started");
         draw();

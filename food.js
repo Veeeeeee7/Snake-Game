@@ -9,13 +9,23 @@ const expansion_rate = 1;
 var onFood = true;
 
 export function update() {
-    if (onSnake(snake1Body, food, onFood, false)) {
+    if (onSnake(snake1Body, food[0], onFood, false)) {
         expandSnake(1, expansion_rate);
-        food = getRandomFoodPosition();
-    }
-    if (onSnake(snake2Body, food, onFood, false)) {
+        food[0] = getRandomFoodPosition();
+        console.log("yes");
+    } else if (onSnake(snake2Body, food[0], onFood, false)) {
         expandSnake(2, expansion_rate);
-        food = getRandomFoodPosition();
+        food[0] = getRandomFoodPosition();
+        console.log("yes");
+    }
+    if (onSnake(snake1Body, food[1], onFood, false)) {
+        expandSnake(1, expansion_rate);
+        food[1] = getRandomFoodPosition();
+        console.log("yes");
+    } else if (onSnake(snake2Body, food[1], onFood, false)) {
+        expandSnake(2, expansion_rate);
+        food[1] = getRandomFoodPosition();
+        console.log("yes");
     }
 }
 
