@@ -8,7 +8,6 @@ import {
     score,
     snake1Body,
     snake2Body,
-    onSnake,
     snakeOnSnake,
 } from "./snake.js";
 
@@ -27,7 +26,8 @@ const startBoard = document.getElementById("start-board");
 const winnerText = document.getElementById("winner");
 let snake1Dead = false;
 let snake2Dead = false;
-let deadOnSnake = false;
+let drawAgain = false;
+let currentScore = 0;
 // var highScore = 0;
 
 function main(currentTime) {
@@ -41,17 +41,17 @@ function main(currentTime) {
 
         if (snake1Dead && snake2Dead) {
             winnerText.innerHTML = "It's a tie!";
-            if (deadOnSnake) {
+            if (drawAgain) {
                 drawRainbowSnake(gameBoard, 1);
             }
         } else if (snake1Dead) {
             winnerText.innerHTML = "Player 2 wins!";
-            if (deadOnSnake) {
+            if (drawAgain) {
                 drawRainbowSnake(gameBoard, 2);
             }
         } else if (snake2Dead) {
             winnerText.innerHTML = "Player 1 wins!";
-            if (deadOnSnake) {
+            if (drawAgain) {
                 drawRainbowSnake(gameBoard, 1);
             }
         }
@@ -79,6 +79,7 @@ function main(currentTime) {
         update();
         startBoard.classList.remove("front");
         startBoard.classList.add("back");
+        currentScore = score();
     }
 }
 
@@ -90,7 +91,7 @@ restartButton.onclick = function restartGame() {
     resetDirection();
     snake1Dead = false;
     snake2Dead = false;
-    deadOnSnake = false;
+    drawAgain = false;
     restartBoard.classList.remove("front");
     restartBoard.classList.add("back");
     startBoard.classList.remove("back");
@@ -103,6 +104,7 @@ function update() {
     updateSnake();
     updateFood();
     checkDeath();
+    checkScore();
     document.getElementById("scores").innerHTML = score();
 }
 
@@ -130,11 +132,24 @@ function checkDeath() {
     if (snakeOnSnake(snake2Body, snake1Body)) {
         gameOver = true;
         snake2Dead = true;
-        deadOnSnake = true;
+        drawAgain = true;
     }
     if (snakeOnSnake(snake1Body, snake2Body)) {
         gameOver = true;
         snake1Dead = true;
-        deadOnSnake = true;
+        drawAgain = true;
+    }
+}
+
+function checkScore() {
+    if (currentScore[0] >= 10) {
+        gameOver = true;
+        snake2Dead = true;
+        drawAgain = true;
+    }
+    if (currentScore[1] >= 10) {
+        gameOver = true;
+        snake1Dead = true;
+        drawAgain = true;
     }
 }

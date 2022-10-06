@@ -20,7 +20,6 @@ var rainbowColors = [
     "#FFFF00",
     "#7FFF00",
     "#00FF00",
-    "#00FF7F",
     "#00FFFF",
     "#007FFF",
     "#0000FF",
