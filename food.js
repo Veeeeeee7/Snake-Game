@@ -12,20 +12,20 @@ export function update() {
     if (onSnake(snake1Body, food[0], onFood, false)) {
         expandSnake(1, expansion_rate);
         food[0] = getRandomFoodPosition();
-        console.log("yes");
+        // console.log("yes");
     } else if (onSnake(snake2Body, food[0], onFood, false)) {
         expandSnake(2, expansion_rate);
         food[0] = getRandomFoodPosition();
-        console.log("yes");
+        // console.log("yes");
     }
     if (onSnake(snake1Body, food[1], onFood, false)) {
         expandSnake(1, expansion_rate);
         food[1] = getRandomFoodPosition();
-        console.log("yes");
+        // console.log("yes");
     } else if (onSnake(snake2Body, food[1], onFood, false)) {
         expandSnake(2, expansion_rate);
         food[1] = getRandomFoodPosition();
-        console.log("yes");
+        // console.log("yes");
     }
 }
 

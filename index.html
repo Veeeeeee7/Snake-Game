@@ -39,12 +39,16 @@
             }
 
             #restart-board {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 25px;
                 background-color: black;
                 width: 50vmin;
                 height: 30vmin;
             }
             #restart-button {
-                position: relative;
                 width: 15vmin;
                 height: 6vmin;
                 top: 17vmin;
@@ -91,7 +95,7 @@
                 width: 10vmin;
                 height: 10vmin;
             }
-            #Current-Score-label {
+            /* #Current-Score-label {
                 position: absolute;
                 color: #ccc;
                 left: 30px;
@@ -130,6 +134,12 @@
                 top: 35px;
                 width: 100vmin;
                 height: 10vmin;
+            } */
+            #winner {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #ccc;
             }
             #start-text {
                 display: flex;
@@ -149,11 +159,12 @@
         </div>
         <div id="scores"></div>
         <div id="restart-board" class="back">
-            <p type="text" id="Current-Score-label">score:</p>
+            <!-- <p type="text" id="Current-Score-label">score:</p>
             <p type="text" id="Current-Score"></p>
             <p type="text" id="High-Score-label">high score:</p>
             <p type="text" id="High-Score"></p>
-            <p type="text" id="New-High-Score"></p>
+            <p type="text" id="New-High-Score"></p> -->
+            <p id="winner"></p>
             <button type="button" onclick="restartGame()" id="restart-button">
                 restart
             </button>
